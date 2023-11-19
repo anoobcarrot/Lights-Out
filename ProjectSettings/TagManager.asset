@@ -10,6 +10,7 @@ TagManager:
   - Player2
   - Battery
   - Skull
+  - Well
   layers:
   - Default
   - TransparentFX

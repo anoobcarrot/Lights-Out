@@ -12,6 +12,7 @@ public class PlayerSkullHandler : MonoBehaviour
     public GameOverHandler gameOverHandler;
 
     bool isSacrificing = false;
+    private bool isInTriggerArea = false;
 
     void Start()
     {
@@ -27,33 +28,46 @@ public class PlayerSkullHandler : MonoBehaviour
         }
     }
 
+    public void SetInTriggerArea(bool value)
+    {
+        isInTriggerArea = value;
+    }
+
     void Update()
     {
-        // Check input for Player1 (G key)
-        if (Input.GetKey(KeyCode.G) && CompareTag("Player1") && !isSacrificing)
+        // Check if the player is in the trigger area before allowing skull sacrifice
+        if (isInTriggerArea)
         {
-            isSacrificing = true;
-            TrySacrificeSkull();
-        }
-        // Check input for Player2 (- key)
-        else if (Input.GetKey(KeyCode.Minus) && CompareTag("Player2") && !isSacrificing)
-        {
-            isSacrificing = true;
-            TrySacrificeSkull();
-        }
+            // Check input for Player1 (G key)
+            if (Input.GetKey(KeyCode.G) && CompareTag("Player1") && !isSacrificing)
+            {
+                isSacrificing = true;
+                TrySacrificeSkull();
+            }
+            // Check input for Player2 (- key)
+            else if (Input.GetKey(KeyCode.Minus) && CompareTag("Player2") && !isSacrificing)
+            {
+                isSacrificing = true;
+                TrySacrificeSkull();
+            }
 
-        // Reset the flag if the key is released
-        if (Input.GetKeyUp(KeyCode.G) || Input.GetKeyUp(KeyCode.Minus))
-        {
-            isSacrificing = false;
+            // Reset the flag if the key is released
+            if (Input.GetKeyUp(KeyCode.G) || Input.GetKeyUp(KeyCode.Minus))
+            {
+                isSacrificing = false;
+            }
         }
     }
 
     public void TrySacrificeSkull()
     {
-        if (currentSkulls > 0)
+        // Check if the player is within the trigger area
+        if (isInTriggerArea)
         {
-            SacrificeSkull();
+            if (currentSkulls > 0)
+            {
+                SacrificeSkull();
+            }
         }
     }
 
@@ -117,6 +131,24 @@ public class PlayerSkullHandler : MonoBehaviour
                 // Notify the SkullManager that a skull is collected
                 skullManager.RespawnSkull(other.gameObject);
             }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // Check if the player stays within the trigger area
+        if (other.CompareTag("Well"))
+        {
+            isInTriggerArea = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // Check if the player exits the trigger area
+        if (other.CompareTag("Well"))
+        {
+            isInTriggerArea = false;
         }
     }
 }

@@ -2,24 +2,29 @@ using UnityEngine;
 
 public class WellTrigger : MonoBehaviour
 {
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetKeyUp(KeyCode.G) && other.CompareTag("Player1"))
+        if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
             PlayerSkullHandler playerSkullHandler = other.GetComponent<PlayerSkullHandler>();
             if (playerSkullHandler != null)
             {
-                playerSkullHandler.TrySacrificeSkull();
+                playerSkullHandler.SetInTriggerArea(true);
             }
         }
-        else if (Input.GetKeyUp(KeyCode.Minus) && other.CompareTag("Player2"))
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
             PlayerSkullHandler playerSkullHandler = other.GetComponent<PlayerSkullHandler>();
             if (playerSkullHandler != null)
             {
-                playerSkullHandler.TrySacrificeSkull();
+                playerSkullHandler.SetInTriggerArea(false);
             }
         }
     }
 }
+
 
