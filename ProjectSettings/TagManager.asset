@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Player1Torch
+  - Player2Torch
+  - Player1
+  - Player2
+  - Battery
+  - Skull
   layers:
   - Default
   - TransparentFX
