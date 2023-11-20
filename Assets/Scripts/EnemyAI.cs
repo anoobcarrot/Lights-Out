@@ -117,6 +117,7 @@ public class EnemyAI : MonoBehaviour
 
         float lightRadiusThreshold = 5f;
 
+        // Return true if either torch light is aiming at the enemy
         return distanceToEnemy1 <= lightRadiusThreshold || distanceToEnemy2 <= lightRadiusThreshold;
     }
 

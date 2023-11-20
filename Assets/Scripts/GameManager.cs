@@ -46,11 +46,12 @@ public class GameManager : MonoBehaviour
             return; // Torch light is not enabled, exit the method
         }
 
+        float increasedTeleportRadius = enemyAI.GetTeleportRadius() * 2f;
         // Check if the direction aligns with the torch's forward direction and within the teleport radius
-        if (Vector3.Dot(torch.transform.forward, directionToEnemy.normalized) > 0.9f &&
-            directionToEnemy.magnitude <= enemyAI.GetTeleportRadius())
+        if (Vector3.Dot(torch.transform.forward, directionToEnemy.normalized) > 0.7f &&
+    directionToEnemy.magnitude <= increasedTeleportRadius)
         {
-            // Torch is aimed directly at the enemy within the teleport radius and the torch light is enabled
+            // Torch is aimed directly at the enemy within the increased teleport radius and the torch light is enabled
             // Trigger teleportation by setting the flag in the EnemyAI script
             enemyAI.SetTeleportFlag();
         }

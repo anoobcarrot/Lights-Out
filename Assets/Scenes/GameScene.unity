@@ -421,7 +421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &160048283
 RectTransform:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &160048287
 MonoBehaviour:
@@ -1666,7 +1666,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -28.364, y: 13.676}
+  m_AnchoredPosition: {x: 0.000015259, y: -0.000025749}
   m_SizeDelta: {x: 692.67, y: 256.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1184206387
@@ -2766,7 +2766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1301507451715090521, guid: 92ab9afa98999404f903ed939986f303, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -114.3
+      value: -60.3
       objectReference: {fileID: 0}
     - target: {fileID: 1301507451715090521, guid: 92ab9afa98999404f903ed939986f303, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3006,6 +3006,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7899779047421907472, guid: 7c227dd7d03b0421589a2e385db802c5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3105,6 +3109,10 @@ PrefabInstance:
     - target: {fileID: 1960743353351760388, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3325499787873509480, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
+      propertyPath: m_Range
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5379898615086909623, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
       propertyPath: healthBar
@@ -3215,6 +3223,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1603585524467901026, guid: f812db27ced86449fa19c56fd60c43ce, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4520822151463509326, guid: f812db27ced86449fa19c56fd60c43ce, type: 3}
       propertyPath: m_Name
       value: Player 2 UI
@@ -3407,6 +3419,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 905624263}
     - target: {fileID: 2740931782136494183, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740931782136494183, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: gameOverUI
       value: 
       objectReference: {fileID: 1184206385}
@@ -3435,6 +3451,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1314778577}
     - target: {fileID: 4280039964754638938, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      propertyPath: dimmingDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280039964754638938, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: durationInSeconds
       value: 60
       objectReference: {fileID: 0}
@@ -3445,6 +3465,10 @@ PrefabInstance:
     - target: {fileID: 7617095176630759048, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: m_Name
       value: Player 1 Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820163042018784404, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      propertyPath: m_Range
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8820163042018784404, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: m_Enabled
@@ -3528,6 +3552,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 160048283}
   - {fileID: 1517857501}
   - {fileID: 1300975423}
   - {fileID: 7393701608725955515}
@@ -3536,7 +3561,6 @@ SceneRoots:
   - {fileID: 659901155}
   - {fileID: 2585657323019869887}
   - {fileID: 2126957158}
-  - {fileID: 160048283}
   - {fileID: 1774618616}
   - {fileID: 27468845814210968}
   - {fileID: 1822798433170047919}
