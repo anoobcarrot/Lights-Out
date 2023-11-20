@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
+  m_AmbientSkyColor: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0.1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.20061573, g: 0.20333138, b: 0.2036938, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -421,7 +421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &160048283
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1048,6 +1048,88 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!4 &660561731 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 354083569114885020, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+  m_PrefabInstance: {fileID: 7393701608725955515}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &660561734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660561722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 660561731}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 1
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
+--- !u!114 &660561735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660561722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 167ccb09ccf89442bae6b0f5b52ee807, type: 2}
+  isGlobal: 1
+  blendDistance: 1
+  weight: 1
+  priority: 1
 --- !u!1 &748252197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,6 +1723,88 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!4 &1454058194 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6917664701861043727, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
+  m_PrefabInstance: {fileID: 2638793961796051905}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1454058197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454058185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 1454058194}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
+--- !u!114 &1454058198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454058185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 167ccb09ccf89442bae6b0f5b52ee807, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &1457318595 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7430875989356703093, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
@@ -2236,6 +2400,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1819726083453711086, guid: 92ab9afa98999404f903ed939986f303, type: 3}
+      propertyPath: m_Height
+      value: 1.4991027
+      objectReference: {fileID: 0}
+    - target: {fileID: 1819726083453711086, guid: 92ab9afa98999404f903ed939986f303, type: 3}
+      propertyPath: m_Radius
+      value: 0.5185852
+      objectReference: {fileID: 0}
+    - target: {fileID: 1819726083453711086, guid: 92ab9afa98999404f903ed939986f303, type: 3}
+      propertyPath: m_Center.x
+      value: 0.01858522
+      objectReference: {fileID: 0}
+    - target: {fileID: 1819726083453711086, guid: 92ab9afa98999404f903ed939986f303, type: 3}
+      propertyPath: m_Center.y
+      value: 0.24955136
+      objectReference: {fileID: 0}
     - target: {fileID: 6031636729940969616, guid: 92ab9afa98999404f903ed939986f303, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -2613,6 +2793,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1927466231066266572, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1454058193}
+    - targetCorrespondingSourceObject: {fileID: 1927466231066266572, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1454058198}
+    - targetCorrespondingSourceObject: {fileID: 1927466231066266572, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1454058197}
     - targetCorrespondingSourceObject: {fileID: 1858642639836130220, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1421025862}
@@ -2859,6 +3045,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7617095176630759048, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       insertIndex: -1
       addedObject: {fileID: 660561730}
+    - targetCorrespondingSourceObject: {fileID: 7617095176630759048, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 660561735}
+    - targetCorrespondingSourceObject: {fileID: 7617095176630759048, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 660561734}
     - targetCorrespondingSourceObject: {fileID: 2649573709142553268, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1696554153}

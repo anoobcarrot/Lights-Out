@@ -151,10 +151,22 @@ public class EnemyAI : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision Detected");
+
         if (collision.collider.CompareTag("Player1") || collision.collider.CompareTag("Player2"))
         {
-            targetPlayer = collision.collider.transform;
-            attackTimer = attackInterval;
+            float distanceToPlayer = Vector3.Distance(transform.position, collision.collider.transform.position);
+
+            Debug.Log("Distance to Player: " + distanceToPlayer);
+
+            // check if the distance is 1.2 or below
+            if (distanceToPlayer <= 1.2f)
+            {
+                targetPlayer = collision.collider.transform;
+                attackTimer = attackInterval;
+
+                Debug.Log("Attacking Player");
+            }
         }
     }
 
@@ -166,7 +178,19 @@ public class EnemyAI : MonoBehaviour
 
             if (targetPlayerHealth != null && targetPlayerHealth.GetCurrentHealth() > 0)
             {
-                targetPlayerHealth.TakeDamage(10);
+                float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
+
+                // attack distance
+                float attackDistance = 1.2f;
+
+                if (distanceToPlayer <= attackDistance)
+                {
+                    targetPlayerHealth.TakeDamage(10);
+                }
+                else
+                {
+                    Debug.Log("Player is too far for attack");
+                }
             }
         }
     }
