@@ -122,7 +122,7 @@ public class Torch : MonoBehaviour
         timer += addedTime;
 
         // Reset the torch light intensity to its original value 
-        torchLight.intensity = 3f;
+        torchLight.intensity = 8f;
 
         // Update the battery image
         UpdateBatteryImage();
