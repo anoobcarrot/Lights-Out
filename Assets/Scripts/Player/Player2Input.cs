@@ -9,7 +9,6 @@ public class Player2Input : MonoBehaviour
     public GameObject torchPrefab;
 
     private Torch torchScript;
-
     private PlayerInput playerInput;
 
     private void Start()
@@ -17,7 +16,7 @@ public class Player2Input : MonoBehaviour
         torchScript = torchPrefab.GetComponent<Torch>();
         if (torchScript == null)
         {
-            Debug.LogError("No Torch component found on the torchPrefab!");
+            UnityEngine.Debug.LogError("No Torch component found on the torchPrefab!");
         }
 
         playerInput = GetComponent<PlayerInput>();
@@ -36,16 +35,13 @@ public class Player2Input : MonoBehaviour
         Vector3 movement = new Vector3(horizontal, 0f, vertical) * currentSpeed * Time.deltaTime;
         transform.Translate(movement);
 
-        // Use horizontal and vertical movement of the joystick to control camera rotation
-        Vector2 rotateInput = playerInput.actions["Rotate"].ReadValue<Vector2>();
-        float rotateInputHorizontal = rotateInput.x;
-        float rotateInputVertical = rotateInput.y;
+        // Use horizontal movement of the joystick to control camera rotation
+        Vector2 lookDelta = playerInput.actions["Rotate"].ReadValue<Vector2>();
+        // Adjust the rotation
+        float rotateInputHorizontal = lookDelta.x * rotationSpeed * Time.deltaTime;
 
-        float rotationHorizontal = rotateInputHorizontal * rotationSpeed * Time.deltaTime;
-        float rotationVertical = rotateInputVertical * rotationSpeed * Time.deltaTime;
-
-        // Adjust the player's rotation
-        transform.Rotate(rotationVertical, rotationHorizontal, 0f);
+        // Rotate the player horizontally
+        transform.Rotate(0f, rotateInputHorizontal, 0f);
 
         if (playerInput.actions["ToggleTorch"].triggered)
         {
@@ -61,9 +57,10 @@ public class Player2Input : MonoBehaviour
         }
         else
         {
-            Debug.Log("Cannot toggle torch. Timer not active or already zero.");
+            UnityEngine.Debug.Log("Cannot toggle torch. Timer not active or already zero.");
         }
     }
 }
+
 
 

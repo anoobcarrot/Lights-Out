@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class PlayerSkullHandler : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerSkullHandler : MonoBehaviour
     public TextMeshProUGUI sacrificedSkullsUIText; // Reference to the TMP UI element for displaying sacrificed skull count
     public SkullManager skullManager;
     public GameOverHandler gameOverHandler;
+    [SerializeField] private PlayerInput playerInput;
 
     bool isSacrificing = false;
     private bool isInTriggerArea = false;
@@ -33,29 +35,34 @@ public class PlayerSkullHandler : MonoBehaviour
         isInTriggerArea = value;
     }
 
-    void Update()
+    private void Update()
     {
         // Check if the player is in the trigger area before allowing skull sacrifice
         if (isInTriggerArea)
         {
-            // Check input for Player1 (G key)
-            if (Input.GetKey(KeyCode.G) && CompareTag("Player1") && !isSacrificing)
-            {
-                isSacrificing = true;
-                TrySacrificeSkull();
-            }
-            // Check input for Player2 (- key)
-            else if (Input.GetKey(KeyCode.Minus) && CompareTag("Player2") && !isSacrificing)
-            {
-                isSacrificing = true;
-                TrySacrificeSkull();
-            }
+            CheckSacrificeInput(playerInput);
+        }
+    }
 
-            // Reset the flag if the key is released
-            if (Input.GetKeyUp(KeyCode.G) || Input.GetKeyUp(KeyCode.Minus))
-            {
-                isSacrificing = false;
-            }
+    private void CheckSacrificeInput(PlayerInput playerInput)
+    {
+        // Check input for Player1 (G key)
+        if (playerInput.actions["Sacrifice"].triggered && CompareTag("Player1") && !isSacrificing)
+        {
+            isSacrificing = true;
+            TrySacrificeSkull();
+        }
+        // Check input for Player2 (- key)
+        else if (playerInput.actions["Sacrifice"].triggered && CompareTag("Player2") && !isSacrificing)
+        {
+            isSacrificing = true;
+            TrySacrificeSkull();
+        }
+
+        // Reset the flag if the key is released
+        if (playerInput.actions["Sacrifice"].triggered)
+        {
+            isSacrificing = false;
         }
     }
 

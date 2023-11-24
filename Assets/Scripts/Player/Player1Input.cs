@@ -1,63 +1,68 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player1Input : MonoBehaviour
 {
     public float movementSpeed = 5f;
-    public float rotationSpeed = 100f; // Adjust this value to control rotation speed
-    public float sprintSpeedMultiplier = 2f; // Adjust this value to control sprint speed
+    public float rotationSpeed = 100f;
+    public float sprintSpeedMultiplier = 2f;
     public GameObject torchPrefab;
-    private Torch torchScript; // Reference to the Torch script
 
-    void Start()
+    private Torch torchScript;
+    private PlayerInput playerInput;
+
+    private void Start()
     {
-        // Get the Torch script from the torchPrefab
         torchScript = torchPrefab.GetComponent<Torch>();
         if (torchScript == null)
         {
-            Debug.LogError("No Torch component found on the torchPrefab!");
+            UnityEngine.Debug.LogError("No Torch component found on the torchPrefab!");
         }
+
+        playerInput = GetComponent<PlayerInput>();
     }
 
-    void Update()
+    private void Update()
     {
-        // Player 1 controls
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        // Player 2 controls using Input System
+        Vector2 moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
+        float horizontal = moveInput.x;
+        float vertical = moveInput.y;
 
-        // Check for sprint input
-        bool sprint = Input.GetKey(KeyCode.LeftShift);
-
-        // Adjust movement speed based on sprint input
+        bool sprint = playerInput.actions["Sprint"].ReadValue<float>() > 0.5f;
         float currentSpeed = sprint ? movementSpeed * sprintSpeedMultiplier : movementSpeed;
 
-        // Move the player
         Vector3 movement = new Vector3(horizontal, 0f, vertical) * currentSpeed * Time.deltaTime;
         transform.Translate(movement);
 
-        // Rotate the player's camera for Player 1
-        float rotateInput = Input.GetAxis("Player1_Rotate");
-        Vector3 rotation = new Vector3(0f, rotateInput * rotationSpeed * Time.deltaTime, 0f);
-        transform.Rotate(rotation);
+        // Use horizontal movement of the joystick to control camera rotation
+        Vector2 lookDelta = playerInput.actions["Rotate"].ReadValue<Vector2>();
+        // Adjust the rotation
+        float rotateInputHorizontal = lookDelta.x * rotationSpeed * Time.deltaTime;
 
-        // Check for torch activation input
-        if (Input.GetKeyDown(KeyCode.T))
+        // Rotate the player horizontally
+        transform.Rotate(0f, rotateInputHorizontal, 0f);
+
+        if (playerInput.actions["ToggleTorch"].triggered)
         {
             ToggleTorch();
         }
     }
 
-    void ToggleTorch()
+    private void ToggleTorch()
     {
-        // Check if the torch timer is active and not zero
         if (torchScript != null && torchScript.IsTimerActive() && !torchScript.IsTimerZero())
         {
-            // Toggle the torch light on/off
             torchScript.ToggleTorchLight();
         }
         else
         {
-            // Add a debug log to see why the conditions were not met
-            Debug.Log("Cannot toggle torch. Timer not active or already zero.");
+            UnityEngine.Debug.Log("Cannot toggle torch. Timer not active or already zero.");
         }
     }
 }
+
+
+
+
+
