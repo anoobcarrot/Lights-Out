@@ -129,18 +129,42 @@ public class EnemyAI : MonoBehaviour
         navMeshAgent.SetDestination(randomDirection);
     }
 
-    void ChasePlayer()
-    {
-        Debug.Log("Chasing");
+   void ChasePlayer()
+{
+    Debug.Log("Chasing");
 
-        if (IsTorchAimingAtEnemy())
+    if (target != null)
+    {
+        GameObject torch = null;
+
+        if (target == player1)
         {
-            TeleportToRandomLocation();
-            return;
+            torch = player1Torch;
+        }
+        else if (target == player2)
+        {
+            torch = player2Torch;
+        }
+
+        if (torch != null)
+        {
+            Light torchLight = torch.GetComponent<Light>(); 
+
+            // Debug logs for inspection
+            Debug.Log($"Torch: {torch}, Torch Active: {torch?.activeSelf}, Torch Light: {torchLight}, Light Enabled: {torchLight?.enabled}, Is Torch Aiming: {IsTorchAimingAtEnemy()}");
+
+            // Check if the torch item itself is active, its light component is enabled, and the torch is aiming at the enemy
+            if (torch != null && torch.activeSelf && torchLight != null && torchLight.enabled && IsTorchAimingAtEnemy())
+            {
+                // Teleport only if the torch item, its light component, and the torch object are aiming at the enemy are active for the closest player
+                TeleportToRandomLocation();
+                return;
+            }
         }
 
         navMeshAgent.SetDestination(target.position);
     }
+}
 
     Transform GetClosestPlayer()
     {

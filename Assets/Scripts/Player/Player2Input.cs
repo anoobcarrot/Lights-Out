@@ -96,17 +96,27 @@ public class Player2Input : MonoBehaviour
     }
 
     private void SwitchToLighter()
+{
+    // Disable the current active item
+    if (currentActiveItem != null)
     {
-        // Disable the current active item
-        if (currentActiveItem != null)
-        {
-            currentActiveItem.SetActive(false);
-        }
+        currentActiveItem.SetActive(false);
 
-        // Enable the lighter
-        lighterPrefab.SetActive(true);
-        currentActiveItem = lighterPrefab;
+        // If the current active item is the torch, disable its light component
+        if (currentActiveItem == torchPrefab)
+        {
+            Torch torch = currentActiveItem.GetComponent<Torch>();
+            if (torch != null)
+            {
+                torch.DisableTorchLight();
+            }
+        }
     }
+
+    // Enable the lighter
+    lighterPrefab.SetActive(true);
+    currentActiveItem = lighterPrefab;
+}
 
     private void ToggleTorch()
     {

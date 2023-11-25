@@ -16,6 +16,11 @@ public class Torch : MonoBehaviour
     void Start()
     {
         timer = durationInSeconds;
+        torchLight = GetComponent<Light>();
+        if (torchLight == null)
+        {
+            Debug.LogError("Light component not found on the torchPrefab!");
+        }
     }
 
     void Update()
@@ -57,6 +62,14 @@ public class Torch : MonoBehaviour
         torchLight.enabled = !torchLight.enabled;
 
         }
+
+    public void DisableTorchLight()
+    {
+        if (torchLight != null)
+        {
+            torchLight.enabled = false;
+        }
+    }
 
     public bool IsTimerActive()
     {
