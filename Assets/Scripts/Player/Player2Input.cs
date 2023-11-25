@@ -7,24 +7,33 @@ public class Player2Input : MonoBehaviour
     public float rotationSpeed = 100f;
     public float sprintSpeedMultiplier = 2f;
     public GameObject torchPrefab;
+    public GameObject lighterPrefab;
 
-    private Torch torchScript;
     private PlayerInput playerInput;
+    private GameObject currentActiveItem;
+    private Torch torchScript;
+    private Lighter lighterScript;
 
     private void Start()
     {
+        playerInput = GetComponent<PlayerInput>();
+        currentActiveItem = torchPrefab; // Set the initial active item
+
         torchScript = torchPrefab.GetComponent<Torch>();
         if (torchScript == null)
         {
-            UnityEngine.Debug.LogError("No Torch component found on the torchPrefab!");
+            Debug.LogError("No Torch component found on the torchPrefab!");
         }
 
-        playerInput = GetComponent<PlayerInput>();
+        lighterScript = lighterPrefab.GetComponent<Lighter>();
+        if (lighterScript == null)
+        {
+            Debug.LogError("No Lighter component found on the lighterPrefab!");
+        }
     }
 
     private void Update()
     {
-        // Player 2 controls using Input System
         Vector2 moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
         float horizontal = moveInput.x;
         float vertical = moveInput.y;
@@ -35,32 +44,84 @@ public class Player2Input : MonoBehaviour
         Vector3 movement = new Vector3(horizontal, 0f, vertical) * currentSpeed * Time.deltaTime;
         transform.Translate(movement);
 
-        // Use horizontal movement of the joystick to control camera rotation
         Vector2 lookDelta = playerInput.actions["Rotate"].ReadValue<Vector2>();
-        // Adjust the rotation
         float rotateInputHorizontal = lookDelta.x * rotationSpeed * Time.deltaTime;
 
-        // Rotate the player horizontally
         transform.Rotate(0f, rotateInputHorizontal, 0f);
 
+        // Handle item toggling
+        if (playerInput.actions["SwitchLight"].triggered)
+        {
+            ToggleItem();
+        }
+
+        // Toggle Torch separately
         if (playerInput.actions["ToggleTorch"].triggered)
         {
             ToggleTorch();
         }
     }
 
+    private void ToggleItem()
+    {
+        // Switch between items based on the current active item
+        if (currentActiveItem == torchPrefab)
+        {
+            SwitchToLighter();
+        }
+        else if (currentActiveItem == lighterPrefab)
+        {
+            SwitchToTorch();
+        }
+    }
+
+    private void SwitchToTorch()
+    {
+        // Disable the current active item
+        if (currentActiveItem != null)
+        {
+            currentActiveItem.SetActive(false);
+        }
+
+        // Enable the torch if the conditions are met
+        if (torchScript != null)
+        {
+            torchPrefab.SetActive(true);
+            currentActiveItem = torchPrefab;
+        }
+        else
+        {
+            Debug.Log("Cannot switch to torch. Timer not active or already zero.");
+        }
+    }
+
+    private void SwitchToLighter()
+    {
+        // Disable the current active item
+        if (currentActiveItem != null)
+        {
+            currentActiveItem.SetActive(false);
+        }
+
+        // Enable the lighter
+        lighterPrefab.SetActive(true);
+        currentActiveItem = lighterPrefab;
+    }
+
     private void ToggleTorch()
     {
-        if (torchScript != null && torchScript.IsTimerActive() && !torchScript.IsTimerZero())
+        // Toggle the torch on and off only if the torch is the active item
+        if (currentActiveItem == torchPrefab && torchScript != null && torchScript.IsTimerActive() && !torchScript.IsTimerZero())
         {
             torchScript.ToggleTorchLight();
         }
         else
         {
-            UnityEngine.Debug.Log("Cannot toggle torch. Timer not active or already zero.");
+            Debug.Log("Cannot toggle torch. Timer not active or already zero, or torch is not the active item.");
         }
     }
 }
+
 
 
 
