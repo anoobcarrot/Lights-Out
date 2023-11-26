@@ -17,16 +17,16 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.08
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.1
+  m_AmbientIntensity: 0
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 51b74d7bad397457d883c5940f7664d8, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18827617, g: 0.19113809, b: 0.19109794, a: 1}
+  m_IndirectSpecularColor: {r: 0.094288744, g: 0.11945031, b: 0.15523598, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 4476962255955077135}
+    - target: {fileID: 2227783650871245212, guid: 8da9ff4780ff06142bdbb37be82bef42, type: 3}
+      propertyPath: m_Intensity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6043671268526903879, guid: 8da9ff4780ff06142bdbb37be82bef42, type: 3}
       propertyPath: m_Name
       value: Lighter
@@ -587,8 +591,8 @@ Transform:
   m_GameObject: {fileID: 249451672}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.757, y: 0.233, z: -6.0573}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.5966, y: -0.2177, z: -5.7282}
+  m_LocalScale: {x: 1.4551792, y: 1.354496, z: 1.851765}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -621,7 +625,7 @@ Transform:
   m_GameObject: {fileID: 621712177}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2675}
+  m_LocalPosition: {x: -0, y: 0, z: 0.1107}
   m_LocalScale: {x: 0.025, y: 1, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -716,7 +720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &659901152
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -843,7 +847,7 @@ Transform:
   m_GameObject: {fileID: 781334080}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.72, y: 0, z: 0}
+  m_LocalPosition: {x: -8.82, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -993,7 +997,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f56329c98eab87d4ea45d90d2dffa012, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1032,8 +1036,8 @@ Transform:
   m_GameObject: {fileID: 1041482887}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.3193, y: -0, z: 10.3522}
-  m_LocalScale: {x: 96.25854, y: 100, z: 100.31432}
+  m_LocalPosition: {x: -1, y: 0, z: -1}
+  m_LocalScale: {x: 40, y: 100, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1067,7 +1071,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 100
-  m_NavMeshData: {fileID: 23800000, guid: 55b9230af834249e280263d6f044974f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: f32a22d23c35bff469297b0fdc2ae8c5, type: 2}
   m_BuildHeightMesh: 0
 --- !u!65 &1041482893
 BoxCollider:
@@ -1275,7 +1279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   batteryPrefab: {fileID: 1569838267970658212, guid: 22d362b7b4e7744bbab11ce33f03a64c, type: 3}
   maxBatteries: 10
-  spawnRadius: 100
+  spawnRadius: 30
 --- !u!4 &1799161286
 Transform:
   m_ObjectHideFlags: 0
@@ -1319,7 +1323,7 @@ Transform:
   m_GameObject: {fileID: 1908745145}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.25050002}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1113}
   m_LocalScale: {x: 0.025, y: 1, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1438,7 +1442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skullPrefab: {fileID: 2702074202456537828, guid: 0cf8f6b5549c94f1da501d33b375778b, type: 3}
   maxSkulls: 15
-  spawnRadius: 100
+  spawnRadius: 30
 --- !u!4 &2001911227
 Transform:
   m_ObjectHideFlags: 0
@@ -1484,7 +1488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableFog: 1
-  fogDensity: 0.2
+  fogDensity: 0.07
   fogColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!4 &2114821892
 Transform:
@@ -1529,7 +1533,7 @@ Transform:
   m_GameObject: {fileID: 2126957157}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 516, y: 225, z: 0}
+  m_LocalPosition: {x: 224, y: 225, z: 0}
   m_LocalScale: {x: 50, y: 500, z: 2000}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1982,6 +1986,10 @@ PrefabInstance:
       propertyPath: batteryImage
       value: 
       objectReference: {fileID: 3293857587606110360}
+    - target: {fileID: 4939161819655359649, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
+      propertyPath: durationInSeconds
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 5282374109769385707, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -2033,6 +2041,10 @@ PrefabInstance:
     - target: {fileID: 5751806697324960382, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6389813647912316543, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
+      propertyPath: m_Intensity
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6389813647912316543, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
       propertyPath: m_SpotAngle
@@ -2158,6 +2170,18 @@ PrefabInstance:
       propertyPath: batteryImage
       value: 
       objectReference: {fileID: 6558832709008913835}
+    - target: {fileID: 409734945347491976, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      propertyPath: durationInSeconds
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361973637762293308, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361973637762293308, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1484737070228540167, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: healthBar
       value: 
@@ -2178,10 +2202,18 @@ PrefabInstance:
       propertyPath: player2Input
       value: 
       objectReference: {fileID: 1901210163846588110}
+    - target: {fileID: 1840261316803770966, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      propertyPath: m_Intensity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2045287172392159031, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: torchPrefab
       value: 
       objectReference: {fileID: 1101244088}
+    - target: {fileID: 2233095742849111618, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      propertyPath: m_Intensity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2901203015059215443, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2238,6 +2270,10 @@ PrefabInstance:
       propertyPath: sacrificedSkullsUIText
       value: 
       objectReference: {fileID: 1958998219}
+    - target: {fileID: 6037162355260456345, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7013810559895250798, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: m_Name
       value: Player 1 Camera

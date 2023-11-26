@@ -6,6 +6,7 @@ public class Player1Input : MonoBehaviour
     public float movementSpeed = 5f;
     public float rotationSpeed = 100f;
     public float sprintSpeedMultiplier = 2f;
+    public float jumpForce = 5f;
     public GameObject torchPrefab;
     public GameObject lighterPrefab;
 
@@ -13,6 +14,9 @@ public class Player1Input : MonoBehaviour
     private GameObject currentActiveItem;
     private Torch torchScript;
     private Lighter lighterScript;
+
+    private Rigidbody playerRigidbody;
+    private bool isGrounded;
 
     private void Start()
     {
@@ -30,6 +34,8 @@ public class Player1Input : MonoBehaviour
         {
             Debug.LogError("No Lighter component found on the lighterPrefab!");
         }
+
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -48,6 +54,11 @@ public class Player1Input : MonoBehaviour
         float rotateInputHorizontal = lookDelta.x * rotationSpeed * Time.deltaTime;
 
         transform.Rotate(0f, rotateInputHorizontal, 0f);
+
+        if (playerInput.actions["Jump"].triggered && isGrounded)
+        {
+            Jump();
+        }
 
         // Handle item toggling
         if (playerInput.actions["SwitchLight"].triggered)
@@ -129,6 +140,23 @@ public class Player1Input : MonoBehaviour
         {
             Debug.Log("Cannot toggle torch. Timer not active or already zero, or torch is not the active item.");
         }
+    }
+
+    private void Jump()
+    {
+        playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        // Check if the player is grounded
+        isGrounded = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // Check if the player is not grounded
+        isGrounded = false;
     }
 }
 
