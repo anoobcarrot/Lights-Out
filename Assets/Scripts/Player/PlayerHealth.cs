@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -16,8 +14,8 @@ public class PlayerHealth : MonoBehaviour
     public GameObject gameOverUI;
     public TextMeshProUGUI gameOverText;
 
-    public Player1Input player1Input; // Replace with your Player1Input script
-    public Player2Input player2Input; // Replace with your Player2Input script
+    public Player1Input player1Input;
+    public Player2Input player2Input;
 
     void Start()
     {
@@ -29,12 +27,10 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isGameOver)
         {
-            // Disable player controls or any other game-related activities
             DisablePlayerControls();
             return;
         }
 
-        // Your existing update logic here...
     }
 
     public void TakeDamage(int damage)
@@ -45,7 +41,6 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0 && !isGameOver)
         {
-            // Player died
             GameOver();
         }
     }
@@ -60,46 +55,16 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Game Over method called");
         isGameOver = true;
-
-        // Disable player controls or any other game-related activities
         DisablePlayerControls();
 
-        // Show game over UI
         gameOverUI.SetActive(true);
         gameOverText.gameObject.SetActive(true);
 
-        // Determine the winner based on which player has more health
-        if (gameObject.CompareTag("Player1"))
-        {
-            if (GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerHealth>().GetCurrentHealth() > 0)
-            {
-                // Player 2 wins
-                gameOverText.text = "You Died!\nPlayer 2 Wins!";
-            }
-            else
-            {
-                // Both players lost
-                gameOverText.text = "Game Over\nIt's a Tie!";
-            }
-        }
-        else if (gameObject.CompareTag("Player2"))
-        {
-            if (GameObject.FindGameObjectWithTag("Player1").GetComponent<PlayerHealth>().GetCurrentHealth() > 0)
-            {
-                // Player 1 wins
-                gameOverText.text = "You Died!\nPlayer 1 Wins!";
-            }
-            else
-            {
-                // Both players lost
-                gameOverText.text = "Game Over\nIt's a Tie!";
-            }
-        }
+        DetermineWinner();
     }
 
     void DisablePlayerControls()
     {
-        // Disable specific player input scripts
         if (gameObject.CompareTag("Player1") && player1Input != null)
         {
             player1Input.enabled = false;
@@ -111,8 +76,32 @@ public class PlayerHealth : MonoBehaviour
             player2Input.enabled = false;
             player1Input.enabled = false;
         }
+    }
 
-        // Add any other control-disabling logic specific to your game
+    void DetermineWinner()
+    {
+        if (gameObject.CompareTag("Player1"))
+        {
+            if (GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerHealth>().GetCurrentHealth() > 0)
+            {
+                gameOverText.text = "You Died!\nPlayer 2 Wins!";
+            }
+            else
+            {
+                gameOverText.text = "Game Over\nIt's a Tie!";
+            }
+        }
+        else if (gameObject.CompareTag("Player2"))
+        {
+            if (GameObject.FindGameObjectWithTag("Player1").GetComponent<PlayerHealth>().GetCurrentHealth() > 0)
+            {
+                gameOverText.text = "You Died!\nPlayer 1 Wins!";
+            }
+            else
+            {
+                gameOverText.text = "Game Over\nIt's a Tie!";
+            }
+        }
     }
 
     public int GetCurrentHealth()

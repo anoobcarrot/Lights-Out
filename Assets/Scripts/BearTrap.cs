@@ -28,7 +28,7 @@ public class BearTrap : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player1"))
+        if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
             Debug.Log("Player entered the bear trap");
             isPlayerInside = true;
@@ -37,7 +37,7 @@ public class BearTrap : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player1"))
+        if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
             Debug.Log("Player exited the bear trap");
             isPlayerInside = false;
