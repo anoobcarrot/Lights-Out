@@ -2874,7 +2874,7 @@ PrefabInstance:
       objectReference: {fileID: 1101244088}
     - target: {fileID: 2045287172392159031, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: rotationSpeed
-      value: 600
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 2045287172392159031, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: trapMessageText
