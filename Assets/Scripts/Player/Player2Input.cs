@@ -6,7 +6,7 @@ using TMPro;
 public class Player2Input : MonoBehaviour
 {
     public float movementSpeed = 5f;
-    public float rotationSpeed = 100f;
+    public float rotationSpeed = 500f;
     public float sprintSpeedMultiplier = 2f;
     public float jumpForce = 5f;
     public GameObject torchPrefab;
@@ -28,6 +28,7 @@ public class Player2Input : MonoBehaviour
     private int escapePressCount = 0;
     private float timeBetweenPresses = 0.5f;
     public TextMeshProUGUI trapMessageText;
+    private GameObject currentBearTrap;
 
     public float fontDecreaseAmount = 5f; // Font size decrease amount
     public float minFontSize = 20f; // Minimum font size
@@ -217,6 +218,9 @@ public class Player2Input : MonoBehaviour
             canMove = false;
             damageCoroutine = StartCoroutine(ApplyDamageOverTime());
 
+            // Store the reference to the bear trap
+            currentBearTrap = other.gameObject;
+
             // Display the trap message text
             if (trapMessageText != null)
             {
@@ -236,6 +240,9 @@ public class Player2Input : MonoBehaviour
             {
                 StopCoroutine(damageCoroutine);
             }
+
+            // Destroy the bear trap that the player exited
+            Destroy(currentBearTrap);
         }
     }
 
@@ -283,7 +290,7 @@ public class Player2Input : MonoBehaviour
         GameObject bearTrap = GameObject.FindGameObjectWithTag("BearTrap");
         if (bearTrap != null)
         {
-            Destroy(bearTrap);
+            Destroy(currentBearTrap);
         }
 
         // Reset escape-related variables
