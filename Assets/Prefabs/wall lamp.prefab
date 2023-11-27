@@ -77,10 +77,10 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0.8124505, b: 0.4009434, a: 1}
-  m_Intensity: 4
-  m_Range: 5
-  m_SpotAngle: 125
+  m_Color: {r: 1, g: 0.6431373, b: 0.21568628, a: 1}
+  m_Intensity: 10
+  m_Range: 7
+  m_SpotAngle: 135
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
