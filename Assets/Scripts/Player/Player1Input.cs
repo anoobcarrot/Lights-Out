@@ -6,7 +6,7 @@ using TMPro;
 public class Player1Input : MonoBehaviour
 {
     public float movementSpeed = 5f;
-    public float rotationSpeed = 100f;
+    public float rotationSpeed = 500f;
     public float sprintSpeedMultiplier = 2f;
     public float jumpForce = 5f;
     public GameObject torchPrefab;
