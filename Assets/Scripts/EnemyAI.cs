@@ -210,7 +210,7 @@ public class EnemyAI : MonoBehaviour
 
                 if (distanceToPlayer <= attackDistance)
                 {
-                    targetPlayerHealth.TakeDamage(10);
+                    targetPlayerHealth.TakeDamage(40);
                 }
                 else
                 {
