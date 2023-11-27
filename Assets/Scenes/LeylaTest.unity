@@ -2688,6 +2688,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1039278605}
     - target: {fileID: 795577816989887132, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
+      propertyPath: rotationSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 795577816989887132, guid: 6687907bf13a44477a560b9085bd989a, type: 3}
       propertyPath: trapMessageText
       value: 
       objectReference: {fileID: 346273133}
@@ -2951,6 +2955,10 @@ PrefabInstance:
       propertyPath: torchPrefab
       value: 
       objectReference: {fileID: 1101244088}
+    - target: {fileID: 2045287172392159031, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
+      propertyPath: rotationSpeed
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 2045287172392159031, guid: b02f867a1338b4cdf8850c592f004eee, type: 3}
       propertyPath: trapMessageText
       value: 
