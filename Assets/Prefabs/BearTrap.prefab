@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7ba83c3fad24c214eaa5ff038787b129, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: BearTrap
       objectReference: {fileID: 0}
     - target: {fileID: 5342759705860451485, guid: 7ba83c3fad24c214eaa5ff038787b129, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -91,6 +91,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ba83c3fad24c214eaa5ff038787b129, type: 3}
       insertIndex: -1
       addedObject: {fileID: 837701192734045547}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ba83c3fad24c214eaa5ff038787b129, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8964141018645038430}
   m_SourcePrefab: {fileID: 100100000, guid: 7ba83c3fad24c214eaa5ff038787b129, type: 3}
 --- !u!1 &3254220337051333877 stripped
 GameObject:
@@ -118,3 +121,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.72, y: 1.95, z: 2.84}
   m_Center: {x: 0, y: 0.81, z: 0}
+--- !u!114 &8964141018645038430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3254220337051333877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9426e5b3ab9d64eab8a796941793f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerTick: 10
+  damageInterval: 1
