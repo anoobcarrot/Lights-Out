@@ -278,7 +278,7 @@
                 {
                     "name": "",
                     "id": "99eac5c4-6e60-40e3-9781-b4d4b88bed71",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
