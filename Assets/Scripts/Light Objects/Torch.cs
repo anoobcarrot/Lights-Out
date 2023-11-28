@@ -4,45 +4,42 @@ using UnityEngine.UI;
 
 public class Torch : MonoBehaviour
 {
-    public Light torchLight;
+    public Transform torchLightTransform;
     public float durationInSeconds = 60f;
-    public float dimmingDuration = 5f;
-    public Image batteryImage; // Reference to the battery image
+    public float flickerDuration = 3f;
+    public float flickerInterval = 0.3f;
+    public float delayBeforeTurnOff = 0.5f;
+    public Image batteryImage;
 
+    private Light torchLight;
     private float timer;
-    private bool isDimming = false; // Track whether the torch is currently dimming
-    [SerializeField] private bool isTimerZero = false; // Track whether the timer has reached zero
+    private bool isFlickering = false;
+    private bool isTimerZero = false;
 
     void Start()
     {
         timer = durationInSeconds;
-        torchLight = GetComponent<Light>();
+        torchLight = torchLightTransform.GetComponentInChildren<Light>();
+
         if (torchLight == null)
         {
-            Debug.LogError("Light component not found on the torchPrefab!");
+            Debug.LogError("Light component not found on the Torch light GameObject!");
         }
     }
 
     void Update()
     {
-        // Check if the torch light is enabled
-        if (torchLight.enabled)
+        if (torchLightTransform.gameObject.activeSelf)
         {
-            // Update the timer if the torch is not currently dimming
-            if (!isDimming)
+            if (!isFlickering)
             {
                 timer -= Time.deltaTime;
                 UpdateBatteryImage();
 
-                // Check if the timer has reached 0 seconds
                 if (timer <= 0f)
                 {
-                    // Turn off the torch light
-                    // torchLight.enabled = false;
-                    isTimerZero = true; // Set the flag to indicate that the timer is zero
-
-                    // Start dimming the torch
-                    StartCoroutine(DimAndTurnOff());
+                    isTimerZero = true;
+                    StartCoroutine(FlickerAndTurnOff());
                 }
             }
         }
@@ -50,97 +47,92 @@ public class Torch : MonoBehaviour
 
     public void ToggleTorchLight()
     {
-        // Check if the torch is currently dimming or the timer is zero
-        if (isDimming || timer <= 0f)
+        if (isFlickering || timer <= 0f)
         {
-            // Optional: You might want to add some feedback or log a message indicating why the torch can't be toggled.
-            Debug.Log("Cannot toggle torch. Torch is currently dimming or the timer is zero.");
+            Debug.Log("Cannot toggle torch. Torch is currently flickering or the timer is zero.");
             return;
         }
 
-        // Toggle the torch light on/off
-        torchLight.enabled = !torchLight.enabled;
+        // Toggle the visibility of the torchLightTransform
+        torchLightTransform.gameObject.SetActive(!torchLightTransform.gameObject.activeSelf);
 
+        // Toggle the enabled state of the Light component on the child object
+        Light torchLight = torchLightTransform.GetComponentInChildren<Light>();
+        if (torchLight != null)
+        {
+            torchLight.enabled = torchLightTransform.gameObject.activeSelf;
         }
+    }
 
     public void DisableTorchLight()
     {
-        if (torchLight != null)
+        if (torchLightTransform != null)
         {
-            torchLight.enabled = false;
+            torchLightTransform.gameObject.SetActive(false);
         }
     }
 
     public bool IsTimerActive()
     {
-        return timer > 0f && !isDimming;
+        return timer > 0f && !isFlickering;
     }
 
     public bool IsTimerZero()
     {
-        return timer <= 0f && !isDimming;
+        return timer <= 0f && !isFlickering;
     }
 
-    IEnumerator DimAndTurnOff()
+    IEnumerator FlickerAndTurnOff()
     {
-        isDimming = true; // Set the flag to indicate that the torch is currently dimming
+        isFlickering = true;
 
-        // Dim the torch over the dimming duration
-        float initialIntensity = torchLight.intensity;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < dimmingDuration)
+        // Flicker effect for 3 seconds
+        float flickerEndTime = Time.time + flickerDuration;
+        while (Time.time < flickerEndTime)
         {
-            // Calculate the lerp factor based on time
-            float lerpFactor = elapsedTime / dimmingDuration;
-
-            // Lerp the intensity from initial to 0
-            torchLight.intensity = Mathf.Lerp(initialIntensity, 0f, lerpFactor);
-
-            // Update elapsed time
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
+            torchLightTransform.gameObject.SetActive(!torchLightTransform.gameObject.activeSelf);
+            yield return new WaitForSeconds(flickerInterval);
         }
 
-        // Ensure the torch is completely off
-        torchLight.intensity = 0f;
+        // Wait for a short delay before turning off the torch light
+        yield return new WaitForSeconds(delayBeforeTurnOff);
 
-        // Wait for a short duration to ensure the dimming effect is visible
-        yield return new WaitForSeconds(0.2f);
+        // Keep the torchLightTransform disabled
+        torchLightTransform.gameObject.SetActive(false);
 
-        // Disable the torch light
-        torchLight.enabled = false;
+        Light torchLight = torchLightTransform.GetComponentInChildren<Light>();
+        if (torchLight != null)
+        {
+            torchLight.enabled = torchLightTransform.gameObject.activeSelf;
+        }
 
-        isDimming = false; // Reset the dimming flag
+        isFlickering = false;
+        isTimerZero = false;
     }
 
     void UpdateBatteryImage()
     {
-        // Calculate the fill amount based on the remaining time
         float fillAmount = Mathf.Clamp01(timer / durationInSeconds);
-
-        // Update the battery image fill amount
         batteryImage.fillAmount = fillAmount;
     }
+
     public void IncreaseTimer(float bonusTime)
     {
-        // Calculate the remaining time to reach the maximum duration
         float remainingTime = durationInSeconds - timer;
-
-        // Add the bonus time but ensure it doesn't exceed the maximum duration
         float addedTime = Mathf.Min(bonusTime, remainingTime);
-
-        // Increase the timer
         timer += addedTime;
 
-        // Reset the torch light intensity to its original value 
-        torchLight.intensity = 20f;
+        // Re-enable the torchLightTransform
+        torchLightTransform.gameObject.SetActive(true);
 
-        // Update the battery image
         UpdateBatteryImage();
     }
 }
+
+
+
+
+
 
 
 

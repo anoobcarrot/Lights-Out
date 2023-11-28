@@ -30,6 +30,11 @@ public class Player2Input : MonoBehaviour
     public TextMeshProUGUI trapMessageText;
     private GameObject currentBearTrap;
 
+    public Animator playerAnimator;
+    public Transform headTransform;
+    public Transform cameraTransform;
+    private float verticalRotation = 0f;
+
     public float fontDecreaseAmount = 5f; // Font size decrease amount
     public float minFontSize = 20f; // Minimum font size
 
@@ -81,7 +86,7 @@ public class Player2Input : MonoBehaviour
             trapMessageText.gameObject.SetActive(true);
 
             // Change the text content to include the actual input action button
-            string escapeButton = playerInput.actions["BearTrapEscape"].bindings[1].ToDisplayString();
+            string escapeButton = playerInput.actions["BearTrapEscape"].bindings[0].ToDisplayString();
             trapMessageText.text = $"You have stepped into a bear trap. Press {escapeButton} to struggle!";
         }
         else if (trapMessageText != null)
@@ -96,16 +101,43 @@ public class Player2Input : MonoBehaviour
         float horizontal = moveInput.x;
         float vertical = moveInput.y;
 
+        // Invert the vertical input for correct movement
+        vertical = -vertical;
+        horizontal = -horizontal;
+
         bool sprint = playerInput.actions["Sprint"].ReadValue<float>() > 0.5f;
         float currentSpeed = sprint ? movementSpeed * sprintSpeedMultiplier : movementSpeed;
+
+        // Trigger Run animation when sprinting
+        playerAnimator.SetBool("IsRunning", sprint);
 
         Vector3 movement = new Vector3(horizontal, 0f, vertical) * currentSpeed * Time.deltaTime;
         transform.Translate(movement);
 
-        Vector2 lookDelta = playerInput.actions["Rotate"].ReadValue<Vector2>();
-        float rotateInputHorizontal = lookDelta.x * rotationSpeed * Time.deltaTime;
+        // Rotate the head and the camera up and down
+        if (headTransform != null && cameraTransform != null)
+        {
+            Vector2 rotateInput = playerInput.actions["Rotate"].ReadValue<Vector2>();
+            float rotateInputHorizontal = rotateInput.x;
+            float rotateInputVertical = rotateInput.y;
 
-        transform.Rotate(0f, rotateInputHorizontal, 0f);
+            // Invert the vertical input for correct rotation
+            rotateInputVertical = -rotateInputVertical;
+
+            float rotationHorizontal = rotateInputHorizontal * rotationSpeed * Time.deltaTime;
+            float rotationVertical = rotateInputVertical * rotationSpeed * Time.deltaTime;
+
+            // Rotate the head object vertically
+            verticalRotation = Mathf.Clamp(verticalRotation - rotationVertical, -53f, 90f);
+            headTransform.localEulerAngles = new Vector3(verticalRotation, headTransform.localEulerAngles.y, 0f);
+
+            // Rotate the camera horizontally
+            transform.Rotate(0f, rotationHorizontal, 0f);
+        }
+
+        // Trigger Walk1 animation based on movement
+        float movementMagnitude = new Vector2(horizontal, vertical).magnitude;
+        playerAnimator.SetFloat("Speed", movementMagnitude);
     }
 
     private void HandleItemToggling()
@@ -195,8 +227,12 @@ public class Player2Input : MonoBehaviour
         if (playerInput.actions["Jump"].triggered && isGrounded)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+            // Set Walk1 animation directly
+            playerAnimator.Play("Walk1");
         }
     }
+
 
     private void OnCollisionStay(Collision collision)
     {

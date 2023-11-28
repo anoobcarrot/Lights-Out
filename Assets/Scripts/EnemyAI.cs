@@ -106,8 +106,8 @@ public class EnemyAI : MonoBehaviour
         if (player1Torch == null || player2Torch == null)
             return false;
 
-        Light torchLight1 = player1Torch.GetComponent<Light>();
-        Light torchLight2 = player2Torch.GetComponent<Light>();
+        Light torchLight1 = player1Torch.GetComponentInChildren<Light>();
+        Light torchLight2 = player2Torch.GetComponentInChildren<Light>();
 
         if (torchLight1 == null || !torchLight1.enabled || torchLight2 == null || !torchLight2.enabled)
             return false;
@@ -148,7 +148,7 @@ public class EnemyAI : MonoBehaviour
 
         if (torch != null)
         {
-            Light torchLight = torch.GetComponent<Light>(); 
+            Light torchLight = torch.GetComponentInChildren<Light>(); 
 
             // Debug logs for inspection
             Debug.Log($"Torch: {torch}, Torch Active: {torch?.activeSelf}, Torch Light: {torchLight}, Light Enabled: {torchLight?.enabled}, Is Torch Aiming: {IsTorchAimingAtEnemy()}");
@@ -184,8 +184,8 @@ public class EnemyAI : MonoBehaviour
 
             Debug.Log("Distance to Player: " + distanceToPlayer);
 
-            // check if the distance is 1.2 or below
-            if (distanceToPlayer <= 1.2f)
+            // check if the distance is 1.5 or below
+            if (distanceToPlayer <= 1.5f)
             {
                 targetPlayer = collision.collider.transform;
                 attackTimer = attackInterval;
@@ -206,7 +206,7 @@ public class EnemyAI : MonoBehaviour
                 float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
 
                 // attack distance
-                float attackDistance = 1.2f;
+                float attackDistance = 1.5f;
 
                 if (distanceToPlayer <= attackDistance)
                 {

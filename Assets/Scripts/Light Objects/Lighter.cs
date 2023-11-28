@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class Lighter : MonoBehaviour
 {
     private Light lighterLight;
+    public Transform lighterLightTransform;
     [SerializeField] private PlayerInput playerInput;
 
     private void Start()
@@ -25,7 +26,14 @@ public class Lighter : MonoBehaviour
 
     public void ToggleLight()
     {
+        // Toggle the light component
         lighterLight.enabled = !lighterLight.enabled;
+
+        // Toggle the visibility of the lighterLightTransform
+        if (lighterLightTransform != null)
+        {
+            lighterLightTransform.gameObject.SetActive(lighterLight.enabled);
+        }
     }
 }
 

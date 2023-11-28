@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Check if the torch light is enabled
-        Light torchLight = torch.GetComponent<Light>();
+        Light torchLight = torch.GetComponentInChildren<Light>();
         if (torchLight == null || !torchLight.enabled)
         {
             return; // Torch light is not enabled, exit the method

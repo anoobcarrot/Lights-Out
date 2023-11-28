@@ -30,13 +30,21 @@ public class PlayerHealth : MonoBehaviour
             DisablePlayerControls();
             return;
         }
-
     }
 
     public void TakeDamage(int damage)
     {
+        if (isGameOver)
+        {
+            // If the game is already over, do nothing
+            return;
+        }
+
         Debug.Log("Taking Damage: " + damage);
-        currentHealth -= damage;
+
+        // Ensure that damage won't make the health negative
+        currentHealth = Mathf.Max(0, currentHealth - damage);
+
         UpdateHealthUI();
 
         if (currentHealth <= 0 && !isGameOver)
@@ -109,3 +117,4 @@ public class PlayerHealth : MonoBehaviour
         return currentHealth;
     }
 }
+
