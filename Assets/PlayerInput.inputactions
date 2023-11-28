@@ -289,7 +289,7 @@
                 {
                     "name": "",
                     "id": "1193bc08-41b8-4695-b983-58c607b4b43b",
-                    "path": "<Keyboard>/t",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -377,7 +377,7 @@
                 {
                     "name": "",
                     "id": "665b3e32-09dc-4e3b-b27c-e1b2a4a03fbf",
-                    "path": "<Keyboard>/l",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -388,7 +388,7 @@
                 {
                     "name": "",
                     "id": "d7bcccad-bbfc-4271-9069-a9d2f34393fc",
-                    "path": "<XInputController>/buttonEast",
+                    "path": "<XInputController>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
