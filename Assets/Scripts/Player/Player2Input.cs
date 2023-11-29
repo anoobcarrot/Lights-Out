@@ -86,7 +86,7 @@ public class Player2Input : MonoBehaviour
             trapMessageText.gameObject.SetActive(true);
 
             // Change the text content to include the actual input action button
-            string escapeButton = playerInput.actions["BearTrapEscape"].bindings[0].ToDisplayString();
+            string escapeButton = playerInput.actions["BearTrapEscape"].bindings[1].ToDisplayString();
             trapMessageText.text = $"You have stepped into a bear trap. Press {escapeButton} to struggle!";
         }
         else if (trapMessageText != null)
