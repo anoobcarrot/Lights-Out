@@ -5,6 +5,7 @@ public class Skull : MonoBehaviour
     public float interactRadius = 5f; // Radius within which the player can pick up the skull
     public PlayerSkullHandler player1SkullHandler; // Assign in the Inspector for Player1
     public PlayerSkullHandler player2SkullHandler; // Assign in the Inspector for Player2
+    private bool isDropped = false;
 
     private void Start()
     {
@@ -38,6 +39,16 @@ public class Skull : MonoBehaviour
             // Hide the pickup text if the player is not close or not looking at the skull
             // HidePickupText();
         }
+    }
+
+    public bool IsDropped()
+    {
+        return isDropped;
+    }
+
+    public void SetDropped(bool dropped)
+    {
+        isDropped = dropped;
     }
 
     private void HandleSkullInteraction(PlayerSkullHandler playerSkullHandler)

@@ -8,10 +8,12 @@ public class Player1Input : MonoBehaviour
     public float movementSpeed = 5f;
     public float rotationSpeed = 500f;
     public float sprintSpeedMultiplier = 2f;
+    public float carryingSkullMoveSpeed = 2.5f;
     public float jumpForce = 5f;
     public GameObject torchPrefab;
     public GameObject lighterPrefab;
 
+    private PlayerSkullHandler playerSkullHandler;
     private PlayerInput playerInput;
     private GameObject currentActiveItem;
     private Torch torchScript;
@@ -45,6 +47,7 @@ public class Player1Input : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         currentActiveItem = torchPrefab; // Set the initial active item
         playerHealth = GetComponentInChildren<PlayerHealth>();
+        playerSkullHandler = GetComponent<PlayerSkullHandler>();
 
         if (trapMessageText != null)
         {
@@ -93,7 +96,15 @@ public class Player1Input : MonoBehaviour
         {
             trapMessageText.gameObject.SetActive(false);
         }
+
+    // Check for the "Drop" input action
+        if (playerInput.actions["Drop"].triggered)
+        {
+            // Call the DropSkull method from the PlayerSkullHandler script
+            playerSkullHandler.DropSkull();
+        }
     }
+
 
     private void HandleMovement()
     {
@@ -106,7 +117,8 @@ public class Player1Input : MonoBehaviour
         horizontal = -horizontal;
 
         bool sprint = playerInput.actions["Sprint"].ReadValue<float>() > 0.5f;
-        float currentSpeed = sprint ? movementSpeed * sprintSpeedMultiplier : movementSpeed;
+
+        float currentSpeed = playerSkullHandler.IsCarryingSkull() ? carryingSkullMoveSpeed : (sprint ? movementSpeed * sprintSpeedMultiplier : movementSpeed);
 
         // Trigger Run animation when sprinting
         playerAnimator.SetBool("IsRunning", sprint);

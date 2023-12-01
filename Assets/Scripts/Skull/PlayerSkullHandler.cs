@@ -20,6 +20,8 @@ public class PlayerSkullHandler : MonoBehaviour
     public TextMeshProUGUI pickupText;
     public Camera playerCamera;
 
+    public GameObject skullHand;
+
     void Start()
     {
         // Assuming you've assigned the SkullManager and GameOverHandler in the inspector
@@ -60,7 +62,47 @@ public class PlayerSkullHandler : MonoBehaviour
             CheckBatteryInput(playerInput);
 
             UpdateBatteryPickupText();
+
+            UpdateSkullHand();
         }
+
+        // Check for the "Drop" input action
+        if (playerInput.actions["Drop"].triggered)
+        {
+            DropSkull();
+        }
+    }
+
+    public void DropSkull()
+    {
+        if (IsCarryingSkull())
+        {
+            // Find the position where the player was last standing and drop the skull there
+            Vector3 dropPosition = transform.position;
+            dropPosition.y = 0f; // Set the y-coordinate to 0 to avoid dropping the skull in mid-air
+
+            // Instantiate the dropped skull
+            GameObject droppedSkull = Instantiate(skullManager.skullPrefab, dropPosition, Quaternion.identity);
+
+            // Decrement the current skulls count
+            currentSkulls--;
+
+            // Update UI
+            UpdateSkullUI();
+
+            // Set the dropped flag for the dropped skull
+            Skull skullComponent = droppedSkull.GetComponent<Skull>();
+            if (skullComponent != null)
+            {
+                skullComponent.SetDropped(true);
+            }
+        }
+    }
+
+    private void UpdateSkullHand()
+    {
+        // Activate/deactivate the body game object based on whether the player is carrying a skull
+        skullHand.SetActive(IsCarryingSkull());
     }
 
     private void CheckBatteryInput(PlayerInput playerInput)
