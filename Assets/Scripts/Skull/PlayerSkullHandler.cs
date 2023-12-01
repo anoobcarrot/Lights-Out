@@ -56,8 +56,87 @@ public class PlayerSkullHandler : MonoBehaviour
         {
             // Update the pickup text
             UpdatePickupText();
+
+            CheckBatteryInput(playerInput);
+
+            UpdateBatteryPickupText();
         }
     }
+
+    private void CheckBatteryInput(PlayerInput playerInput)
+{
+    // Check input for Player1 (G key)
+    if (playerInput.actions["Interact"].triggered && CompareTag("Player1"))
+    {
+        CollectBattery();
+    }
+    // Check input for Player2 (- key)
+    else if (playerInput.actions["Interact"].triggered && CompareTag("Player2"))
+    {
+        CollectBattery();
+    }
+}
+
+private void CollectBattery()
+{
+    Battery battery = FindNearestBattery();
+
+    if (battery != null)
+    {
+        battery.CollectBattery(this);
+        UpdateBatteryPickupText();
+    }
+}
+
+// Find the nearest battery within the trigger area
+private Battery FindNearestBattery()
+{
+    Battery[] batteries = FindObjectsOfType<Battery>();
+    Battery nearestBattery = null;
+    float nearestDistance = float.MaxValue;
+
+    foreach (Battery battery in batteries)
+    {
+        float distance = Vector3.Distance(battery.transform.position, transform.position);
+
+        if (distance < nearestDistance)
+        {
+            nearestDistance = distance;
+            nearestBattery = battery;
+        }
+    }
+
+    return nearestBattery;
+}
+
+private void UpdateBatteryPickupText()
+{
+    Debug.Log("Updating battery pickup text method called.");
+
+    // Cast a ray from the player's camera
+    Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+    RaycastHit hit;
+
+    // Set the raycast distance based on your game's requirements
+    float raycastDistance = 5f;
+
+    if (Physics.Raycast(ray, out hit, raycastDistance))
+    {
+        // Check if the hit object is a battery
+        Battery battery = hit.collider.GetComponent<Battery>();
+
+        if (battery != null)
+        {
+            Debug.Log($"Updating battery pickup text: {pickupText.text}");
+            pickupText.text = $"Pick Up Battery [{GetInteractInputDisplayName()}]";
+            return;
+        }
+    }
+
+    // If no battery is hit, hide the pickup text
+    Debug.Log("Hiding battery pickup text (no batteries nearby).");
+    pickupText.text = "";
+}
 
     private void CheckSacrificeInput(PlayerInput playerInput)
     {
