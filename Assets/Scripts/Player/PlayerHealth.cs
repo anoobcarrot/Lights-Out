@@ -17,6 +17,10 @@ public class PlayerHealth : MonoBehaviour
     public Player1Input player1Input;
     public Player2Input player2Input;
 
+     // Event to be triggered when the player takes damage
+    public delegate void TakeDamageDelegate(int damage);
+    public event TakeDamageDelegate OnTakeDamage;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -33,25 +37,30 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void TakeDamage(int damage)
+{
+    if (isGameOver)
     {
-        if (isGameOver)
-        {
-            // If the game is already over, do nothing
-            return;
-        }
-
-        Debug.Log("Taking Damage: " + damage);
-
-        // Ensure that damage won't make the health negative
-        currentHealth = Mathf.Max(0, currentHealth - damage);
-
-        UpdateHealthUI();
-
-        if (currentHealth <= 0 && !isGameOver)
-        {
-            GameOver();
-        }
+        // If the game is already over, do nothing
+        return;
     }
+
+    Debug.Log("Taking Damage: " + damage);
+
+    // Ensure that damage won't make the health negative
+    currentHealth = Mathf.Max(0, currentHealth - damage);
+
+    // Update the health UI first
+    UpdateHealthUI();
+
+    // Trigger the OnTakeDamage event
+    OnTakeDamage?.Invoke(damage);
+
+    if (currentHealth <= 0 && !isGameOver)
+    {
+        GameOver();
+    }
+}
+
 
     void UpdateHealthUI()
     {
