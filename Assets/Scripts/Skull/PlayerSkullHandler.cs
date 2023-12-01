@@ -53,6 +53,7 @@ public class PlayerSkullHandler : MonoBehaviour
         if (isInTriggerArea)
         {
             CheckSacrificeInput(playerInput);
+            UpdateSacrificeText();
         }
         else
         {
@@ -202,6 +203,14 @@ private void UpdateBatteryPickupText()
         }
     }
 
+    public string GetSacrificeInputDisplayName()
+    {
+        int bindingIndex = CompareTag("Player1") ? 0 : 1;
+
+        // Get the binding display name for the specified "Sacrifice" action and binding index
+        return playerInput.actions["Sacrifice"].GetBindingDisplayString(bindingIndex);
+    }
+
     public void TrySacrificeSkull()
     {
         // Check if the player is within the trigger area
@@ -222,6 +231,12 @@ private void UpdateBatteryPickupText()
             UpdateSkullUI();
             skullManager.RespawnSkull(skull);
         }
+    }
+
+    private void UpdateSacrificeText()
+    {
+        // Update the TMP UI element with the sacrifice text
+        pickupText.text = $"[{GetSacrificeInputDisplayName()}] to Sacrifice";
     }
 
     public void SacrificeSkull()
