@@ -16,6 +16,10 @@ public class PlayerSkullHandler : MonoBehaviour
     bool isSacrificing = false;
     private bool isInTriggerArea = false;
 
+    // Reference to the pickup text
+    public TextMeshProUGUI pickupText;
+    public Camera playerCamera;
+
     void Start()
     {
         // Assuming you've assigned the SkullManager and GameOverHandler in the inspector
@@ -27,6 +31,12 @@ public class PlayerSkullHandler : MonoBehaviour
         if (gameOverHandler == null)
         {
             Debug.LogError("GameOverHandler not assigned to PlayerSkullHandler.");
+        }
+
+        // Assuming you've assigned the pickup text in the inspector
+        if (pickupText == null)
+        {
+            Debug.LogError("PickupText not assigned to PlayerSkullHandler.");
         }
     }
 
@@ -41,6 +51,11 @@ public class PlayerSkullHandler : MonoBehaviour
         if (isInTriggerArea)
         {
             CheckSacrificeInput(playerInput);
+        }
+        else
+        {
+            // Update the pickup text
+            UpdatePickupText();
         }
     }
 
@@ -121,44 +136,93 @@ public class PlayerSkullHandler : MonoBehaviour
         sacrificedSkullsUIText.text = "Sacrificed Skulls: " + sacrificedSkulls;
     }
 
-    public bool IsCarryingSkull()
+    // Find the nearest skull
+    GameObject FindNearestSkull()
+{
+    GameObject[] skulls = GameObject.FindGameObjectsWithTag("Skull");
+    GameObject nearestSkull = null;
+    float nearestDistance = float.MaxValue;
+
+    foreach (GameObject skull in skulls)
     {
-        return currentSkulls > 0;
+        float distance = Vector3.Distance(skull.transform.position, transform.position);
+
+        if (distance < nearestDistance)
+        {
+            nearestDistance = distance;
+            nearestSkull = skull;
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Skull"))
-        {
-            // Assuming you have a reference to the SkullManager
-            SkullManager skullManager = FindObjectOfType<SkullManager>();
+    return nearestSkull;
+}
 
-            if (skullManager != null)
+     private void UpdatePickupText()
+    {
+        GameObject nearestSkull = FindNearestSkull();
+
+        if (nearestSkull != null)
+        {
+            float distance = Vector3.Distance(nearestSkull.transform.position, transform.position);
+            float interactRadius = nearestSkull.GetComponent<Skull>().interactRadius;
+
+            // Check if the player is within the required radius and looking at the skull
+            if (distance <= interactRadius && nearestSkull.GetComponent<Skull>().IsPlayerLookingAtSkull(this))
             {
-                // Notify the SkullManager that a skull is collected
-                skullManager.RespawnSkull(other.gameObject);
+                Debug.Log($"Updating pickup text: {pickupText.text}");
+                pickupText.text = $"Pick Up Skull [{GetInteractInputDisplayName()}]";
+            }
+            else
+            {
+                Debug.Log("Hiding pickup text.");
+                // Hide the pickup text if the player is not close enough or not looking at the skull
+                pickupText.text = "";
             }
         }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        // Check if the player stays within the trigger area
-        if (other.CompareTag("Well"))
+        else
         {
-            isInTriggerArea = true;
+            Debug.Log("Hiding pickup text (no skulls nearby).");
+            // Hide the pickup text if no skulls are nearby
+            pickupText.text = "";
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public bool IsInteractButtonPressed()
+{
+    // Check if the interact input action is triggered
+    bool isPressed = playerInput.actions["Interact"].triggered;
+    Debug.Log($"Interact Button Pressed: {isPressed}");
+    return isPressed;
+}
+
+   public string GetInteractInputDisplayName()
+{
+    int bindingIndex = CompareTag("Player1") ? 0 : 1;
+
+    // Get the binding display name for the specified "Interact" action and binding index
+    return playerInput.actions["Interact"].GetBindingDisplayString(bindingIndex);
+}
+
+    public void ShowPickupText(string text)
     {
-        // Check if the player exits the trigger area
-        if (other.CompareTag("Well"))
-        {
-            isInTriggerArea = false;
-        }
+        // Display the pickup text
+        pickupText.text = text;
+    }
+
+    public void HidePickupText()
+    {
+        // Hide the pickup text
+        pickupText.text = "";
+    }
+
+    public bool IsCarryingSkull()
+    {
+        // Check if the player is carrying a skull
+        return currentSkulls > 0;
     }
 }
+
+
 
 
 
