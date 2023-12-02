@@ -3,36 +3,36 @@ using UnityEngine;
 public class Skull : MonoBehaviour
 {
     public float interactRadius = 5f; // Radius within which the player can pick up the skull
-    public PlayerSkullHandler player1SkullHandler; // Assign in the Inspector for Player1
-    public PlayerSkullHandler player2SkullHandler; // Assign in the Inspector for Player2
+    public PlayerItemHandler player1ItemHandler; // Assign in the Inspector for Player1
+    public PlayerItemHandler player2ItemHandler; // Assign in the Inspector for Player2
     private bool isDropped = false;
 
     private void Start()
     {
-        if (player1SkullHandler == null)
+        if (player1ItemHandler == null)
         {
-            Debug.LogError("Player1SkullHandler not assigned in the Inspector.");
+            Debug.LogError("Player1ItemHandler not assigned in the Inspector.");
         }
 
-        if (player2SkullHandler == null)
+        if (player2ItemHandler == null)
         {
-            Debug.LogError("Player2SkullHandler not assigned in the Inspector.");
+            Debug.LogError("Player2ItemlHandler not assigned in the Inspector.");
         }
     }
 
     private void Update()
     {
         // Check if the player is close enough and looking at the skull
-        float distanceToPlayer1 = Vector3.Distance(player1SkullHandler.transform.position, transform.position);
-        float distanceToPlayer2 = Vector3.Distance(player2SkullHandler.transform.position, transform.position);
+        float distanceToPlayer1 = Vector3.Distance(player1ItemHandler.transform.position, transform.position);
+        float distanceToPlayer2 = Vector3.Distance(player2ItemHandler.transform.position, transform.position);
 
-        if (distanceToPlayer1 <= interactRadius && IsPlayerLookingAtSkull(player1SkullHandler))
+        if (distanceToPlayer1 <= interactRadius && IsPlayerLookingAtSkull(player1ItemHandler))
         {
-            HandleSkullInteraction(player1SkullHandler);
+            HandleSkullInteraction(player1ItemHandler);
         }
-        else if (distanceToPlayer2 <= interactRadius && IsPlayerLookingAtSkull(player2SkullHandler))
+        else if (distanceToPlayer2 <= interactRadius && IsPlayerLookingAtSkull(player2ItemHandler))
         {
-            HandleSkullInteraction(player2SkullHandler);
+            HandleSkullInteraction(player2ItemHandler);
         }
         else
         {
@@ -51,18 +51,18 @@ public class Skull : MonoBehaviour
         isDropped = dropped;
     }
 
-    private void HandleSkullInteraction(PlayerSkullHandler playerSkullHandler)
+    private void HandleSkullInteraction(PlayerItemHandler playerItemHandler)
     {
         // Display the pickup text
-        playerSkullHandler.ShowPickupText($"Pick Up Skull [{playerSkullHandler.GetInteractInputDisplayName()}]");
+        playerItemHandler.ShowPickupText($"Pick Up Skull [{playerItemHandler.GetInteractInputDisplayName()}]");
 
         // Check for input to pick up the skull
-        if (playerSkullHandler.IsInteractButtonPressed())
+        if (playerItemHandler.IsInteractButtonPressed())
         {
-            if (!playerSkullHandler.IsCarryingSkull())
+            if (!playerItemHandler.IsCarryingSkull())
             {
                 // Player is picking up the skull
-                playerSkullHandler.PickUpSkull(gameObject);
+                playerItemHandler.PickUpSkull(gameObject);
 
                 // Destroy the skull object (customize this based on your game logic)
                 Destroy(gameObject);
@@ -75,13 +75,13 @@ public class Skull : MonoBehaviour
         }
     }
 
-    public bool IsPlayerLookingAtSkull(PlayerSkullHandler playerSkullHandler)
+    public bool IsPlayerLookingAtSkull(PlayerItemHandler playerItemHandler)
     {
         // Increase the raycast radius to make it more lenient
         float increasedInteractRadius = interactRadius * 3f;
 
         // Raycast from the player's camera to check if it hits the skull
-        Ray ray = new Ray(playerSkullHandler.playerCamera.transform.position, playerSkullHandler.playerCamera.transform.forward);
+        Ray ray = new Ray(playerItemHandler.playerCamera.transform.position, playerItemHandler.playerCamera.transform.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, increasedInteractRadius))
@@ -100,8 +100,8 @@ public class Skull : MonoBehaviour
     private void HidePickupText()
     {
         // Hide the pickup text if the player is not close to any skull
-        player1SkullHandler.HidePickupText();
-        player2SkullHandler.HidePickupText();
+        player1ItemHandler.HidePickupText();
+        player2ItemHandler.HidePickupText();
     }
 }
 

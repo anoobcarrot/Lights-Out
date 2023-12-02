@@ -12,6 +12,7 @@ TagManager:
   - Skull
   - Well
   - BearTrap
+  - Medkit
   layers:
   - Default
   - TransparentFX

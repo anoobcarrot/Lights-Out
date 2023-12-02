@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 
-public class PlayerSkullHandler : MonoBehaviour
+public class PlayerItemHandler : MonoBehaviour
 {
     public int maxSkulls = 1;
     private int currentSkulls = 0;
@@ -12,6 +12,7 @@ public class PlayerSkullHandler : MonoBehaviour
     public SkullManager skullManager;
     public GameOverHandler gameOverHandler;
     [SerializeField] private PlayerInput playerInput;
+    public PlayerHealth playerHealth;
 
     bool isSacrificing = false;
     private bool isInTriggerArea = false;
@@ -48,31 +49,32 @@ public class PlayerSkullHandler : MonoBehaviour
     }
 
     private void Update()
+{
+    // Check if the player is in the trigger area before allowing skull sacrifice
+    if (isInTriggerArea)
     {
-        // Check if the player is in the trigger area before allowing skull sacrifice
-        if (isInTriggerArea)
-        {
-            CheckSacrificeInput(playerInput);
-            UpdateSacrificeText();
-        }
-        else
-        {
-            // Update the pickup text
-            UpdatePickupText();
-
-            CheckBatteryInput(playerInput);
-
-            UpdateBatteryPickupText();
-
-            UpdateSkullHand();
-        }
-
-        // Check for the "Drop" input action
-        if (playerInput.actions["Drop"].triggered)
-        {
-            DropSkull();
-        }
+        CheckSacrificeInput(playerInput);
+        UpdateSacrificeText();
     }
+    else
+    {
+        // Update the pickup text
+        // UpdateMedkitPickupText();
+        // UpdateBatteryPickupText();
+
+        UpdateTheItemPickupText();
+
+        CheckBatteryInput(playerInput);
+        CheckMedkitInput(playerInput);
+    }
+
+    UpdateSkullHand();
+    // Check for the "Drop" input action
+    if (playerInput.actions["Drop"].triggered)
+    {
+        DropSkull();
+    }
+}
 
     public void DropSkull()
     {
@@ -106,6 +108,86 @@ public class PlayerSkullHandler : MonoBehaviour
         skullHand.SetActive(IsCarryingSkull());
     }
 
+    private void CheckMedkitInput(PlayerInput playerInput)
+{
+    // Check input for Player1 (G key)
+    if (playerInput.actions["Interact"].triggered && CompareTag("Player1"))
+    {
+        CollectMedkit();
+    }
+    // Check input for Player2 (- key)
+    else if (playerInput.actions["Interact"].triggered && CompareTag("Player2"))
+    {
+        CollectMedkit();
+    }
+}
+
+private void CollectMedkit()
+{
+    Medkit medkit = FindNearestMedkit();
+
+    if (medkit != null)
+    {
+        medkit.CollectMedkit(this);
+        UpdateTheItemPickupText();
+    }
+}
+
+// Find the nearest medkit
+private Medkit FindNearestMedkit()
+{
+    Medkit[] medkits = FindObjectsOfType<Medkit>();
+    Medkit nearestMedkit = null;
+    float nearestDistance = float.MaxValue;
+
+    foreach (Medkit medkit in medkits)
+    {
+        float distance = Vector3.Distance(medkit.transform.position, transform.position);
+
+        if (distance < nearestDistance)
+        {
+            nearestDistance = distance;
+            nearestMedkit = medkit;
+        }
+    }
+
+    return nearestMedkit;
+}
+
+private void UpdateTheItemPickupText()
+{
+    // Cast a ray from the player's camera
+    Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+    RaycastHit hit;
+
+    // Set the raycast distance based on your game's requirements
+    float raycastDistance = 5f;
+
+    if (Physics.Raycast(ray, out hit, raycastDistance))
+    {
+        // Check if the hit object is a medkit
+        Medkit medkit = hit.collider.GetComponent<Medkit>();
+        if (medkit != null)
+        {
+            pickupText.text = $"Pick Up Medkit [{GetInteractInputDisplayName()}]";
+            return;
+        }
+
+        // Check if the hit object is a battery
+        Battery battery = hit.collider.GetComponent<Battery>();
+        if (battery != null)
+        {
+            pickupText.text = $"Pick Up Battery [{GetInteractInputDisplayName()}]";
+            return;
+        }
+    }
+
+    // If no medkit or battery is hit, hide the pickup text
+    pickupText.text = "";
+}
+
+
+
     private void CheckBatteryInput(PlayerInput playerInput)
 {
     // Check input for Player1 (G key)
@@ -127,7 +209,7 @@ private void CollectBattery()
     if (battery != null)
     {
         battery.CollectBattery(this);
-        UpdateBatteryPickupText();
+        UpdateTheItemPickupText();
     }
 }
 
@@ -152,34 +234,7 @@ private Battery FindNearestBattery()
     return nearestBattery;
 }
 
-private void UpdateBatteryPickupText()
-{
-    Debug.Log("Updating battery pickup text method called.");
 
-    // Cast a ray from the player's camera
-    Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-    RaycastHit hit;
-
-    // Set the raycast distance based on your game's requirements
-    float raycastDistance = 5f;
-
-    if (Physics.Raycast(ray, out hit, raycastDistance))
-    {
-        // Check if the hit object is a battery
-        Battery battery = hit.collider.GetComponent<Battery>();
-
-        if (battery != null)
-        {
-            Debug.Log($"Updating battery pickup text: {pickupText.text}");
-            pickupText.text = $"Pick Up Battery [{GetInteractInputDisplayName()}]";
-            return;
-        }
-    }
-
-    // If no battery is hit, hide the pickup text
-    Debug.Log("Hiding battery pickup text (no batteries nearby).");
-    pickupText.text = "";
-}
 
     private void CheckSacrificeInput(PlayerInput playerInput)
     {
@@ -308,19 +363,13 @@ private void UpdateBatteryPickupText()
                 Debug.Log($"Updating pickup text: {pickupText.text}");
                 pickupText.text = $"Pick Up Skull [{GetInteractInputDisplayName()}]";
             }
-            else
-            {
-                Debug.Log("Hiding pickup text.");
-                // Hide the pickup text if the player is not close enough or not looking at the skull
-                pickupText.text = "";
-            }
-        }
         else
         {
             Debug.Log("Hiding pickup text (no skulls nearby).");
             // Hide the pickup text if no skulls are nearby
             pickupText.text = "";
         }
+    }
     }
 
     public bool IsInteractButtonPressed()

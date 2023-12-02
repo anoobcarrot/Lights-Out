@@ -17,6 +17,8 @@ public class PlayerHealth : MonoBehaviour
     public Player1Input player1Input;
     public Player2Input player2Input;
 
+    public PlayerVisualEffects playerVisualEffects;
+
      // Event to be triggered when the player takes damage
     public delegate void TakeDamageDelegate(int damage);
     public event TakeDamageDelegate OnTakeDamage;
@@ -121,7 +123,47 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public int GetCurrentHealth()
+   public void IncreaseHealth(int amount)
+{
+    if (isGameOver)
+    {
+        // If the game is already over, do nothing
+        return;
+    }
+
+    Debug.Log("Increasing Health: " + amount);
+
+    // Get the current health before the increase
+    int previousHealth = currentHealth;
+
+    // Ensure that increasing health won't exceed the maximum health
+    currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+
+    // Update the health UI
+    UpdateHealthUI();
+
+    // Check if the health has crossed any blood image thresholds
+if (currentHealth > playerVisualEffects.bloodImageThreshold2 && currentHealth <= playerVisualEffects.bloodImageThreshold1)
+{
+    // Health is between 50/100 and 75/100
+    playerVisualEffects.ShowBloodImage(playerVisualEffects.bloodImage1);
+}
+
+    else if (currentHealth <= playerVisualEffects.bloodImageThreshold2)
+    {
+        // Health is 50/100 or below
+        playerVisualEffects.ShowBloodImage(playerVisualEffects.bloodImage2);
+    }
+    else
+    {
+        // Health is above both thresholds, hide the blood images
+        playerVisualEffects.HideBloodImages();
+    }
+}
+
+
+
+public int GetCurrentHealth()
     {
         return currentHealth;
     }

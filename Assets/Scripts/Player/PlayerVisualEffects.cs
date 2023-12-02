@@ -47,15 +47,35 @@ public class PlayerVisualEffects : MonoBehaviour
     // Flash screen
     FlashScreen();
 
+    // Debug logs for health thresholds
+    Debug.Log("Current Health: " + playerHealth.GetCurrentHealth());
+    Debug.Log("Threshold 2: " + bloodImageThreshold2);
+    Debug.Log("Threshold 1: " + bloodImageThreshold1);
+
     // Show blood images based on health thresholds
     if (playerHealth.GetCurrentHealth() <= bloodImageThreshold2)
     {
+        Debug.Log("Show Image 2");
         ShowBloodImage(bloodImage2);
     }
     else if (playerHealth.GetCurrentHealth() <= bloodImageThreshold1)
     {
+        Debug.Log("Show Image 1");
         ShowBloodImage(bloodImage1);
     }
+}
+
+
+// Add a method to hide blood images when health increases
+public void ResetBloodImages()
+{
+    HideBloodImages();
+}
+
+// Add a method to hide blood images
+public void HideBloodImages()
+{
+    bloodImage.gameObject.SetActive(false);
 }
 
 
@@ -76,10 +96,12 @@ public class PlayerVisualEffects : MonoBehaviour
         isFlashing = false;
     }
 
-    private void ShowBloodImage(Sprite bloodSprite)
+    public void ShowBloodImage(Sprite bloodSprite)
     {
         bloodImage.sprite = bloodSprite;
         bloodImage.gameObject.SetActive(true);
     }
 }
+
+
 

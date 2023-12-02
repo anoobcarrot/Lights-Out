@@ -11,7 +11,7 @@ public class Battery : MonoBehaviour
         transform.Rotate(Vector3.up * Time.deltaTime * 30f);
     }
 
-    public void CollectBattery(PlayerSkullHandler player)
+    public void CollectBattery(PlayerItemHandler player)
     {
         // Cast a ray from the player's camera
         Ray ray = new Ray(player.playerCamera.transform.position, player.playerCamera.transform.forward);

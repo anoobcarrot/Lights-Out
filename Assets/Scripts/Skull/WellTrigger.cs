@@ -6,10 +6,10 @@ public class WellTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
-            PlayerSkullHandler playerSkullHandler = other.GetComponent<PlayerSkullHandler>();
-            if (playerSkullHandler != null)
+            PlayerItemHandler playerItemHandler = other.GetComponent<PlayerItemHandler>();
+            if (playerItemHandler != null)
             {
-                playerSkullHandler.SetInTriggerArea(true);
+                playerItemHandler.SetInTriggerArea(true);
             }
         }
     }
@@ -18,10 +18,10 @@ public class WellTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
-            PlayerSkullHandler playerSkullHandler = other.GetComponent<PlayerSkullHandler>();
-            if (playerSkullHandler != null)
+            PlayerItemHandler playerItemHandler = other.GetComponent<PlayerItemHandler>();
+            if (playerItemHandler != null)
             {
-                playerSkullHandler.SetInTriggerArea(false);
+                playerItemHandler.SetInTriggerArea(false);
             }
         }
     }
