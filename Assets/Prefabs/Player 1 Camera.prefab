@@ -292,8 +292,15 @@ MonoBehaviour:
   movementSpeed: 5
   rotationSpeed: 100
   sprintSpeedMultiplier: 2
+  jumpForce: 5
   torchPrefab: {fileID: 0}
   lighterPrefab: {fileID: 6037162355260456345}
+  trapMessageText: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  headTransform: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  fontDecreaseAmount: 5
+  minFontSize: 20
 --- !u!1 &8261605325688164214
 GameObject:
   m_ObjectHideFlags: 0

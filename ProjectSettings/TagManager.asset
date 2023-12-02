@@ -13,6 +13,7 @@ TagManager:
   - Well
   - BearTrap
   - Medkit
+  - Audio
   layers:
   - Default
   - TransparentFX
