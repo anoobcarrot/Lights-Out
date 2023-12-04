@@ -49,31 +49,32 @@ public class PlayerItemHandler : MonoBehaviour
     }
 
     private void Update()
-{
-    // Check if the player is in the trigger area before allowing skull sacrifice
-    if (isInTriggerArea)
     {
-        CheckSacrificeInput(playerInput);
-        UpdateSacrificeText();
-    }
-    else
-    {
-        // Update the pickup text
-        // UpdateMedkitPickupText();
-        // UpdateBatteryPickupText();
+        // Check if the player is in the trigger area before allowing skull sacrifice
+        if (isInTriggerArea)
+        {
+            CheckSacrificeInput(playerInput);
+            UpdateSacrificeText();
+        }
+        else
+        {
+            // Update the pickup text
+            // UpdateMedkitPickupText();
+            // UpdateBatteryPickupText();
 
-        UpdateTheItemPickupText();
+            UpdateTheItemPickupText();
+            UpdatePickupText();
 
-        CheckBatteryInput(playerInput);
-        CheckMedkitInput(playerInput);
-    }
+            CheckBatteryInput(playerInput);
+            CheckMedkitInput(playerInput);
 
-    UpdateSkullHand();
-    // Check for the "Drop" input action
-    if (playerInput.actions["Drop"].triggered)
-    {
-        DropSkull();
-    }
+            UpdateSkullHand();
+            // Check for the "Drop" input action
+            if (playerInput.actions["Drop"].triggered)
+            {
+                DropSkull();
+            }
+        }
 }
 
     public void DropSkull()

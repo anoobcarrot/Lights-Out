@@ -9,6 +9,7 @@ public class WellTrigger : MonoBehaviour
             PlayerItemHandler playerItemHandler = other.GetComponent<PlayerItemHandler>();
             if (playerItemHandler != null)
             {
+                Debug.Log("Played entered well trigger");
                 playerItemHandler.SetInTriggerArea(true);
             }
         }
