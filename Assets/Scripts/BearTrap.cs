@@ -9,6 +9,13 @@ public class BearTrap : MonoBehaviour
     private bool isPlayerInside = false;
     private float timer = 0f;
 
+    private AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     private void Update()
     {
         if (isPlayerInside)
@@ -31,6 +38,7 @@ public class BearTrap : MonoBehaviour
         if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
             Debug.Log("Player entered the bear trap");
+            audioManager.PlaySFX(audioManager.bearTrap);
             isPlayerInside = true;
         }
     }

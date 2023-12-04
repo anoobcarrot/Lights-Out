@@ -13,10 +13,13 @@ public class AudioManager : MonoBehaviour
     public AudioClip ambience;
     public AudioClip walkOutside;
     public AudioClip walkInside;
+    public AudioClip bearTrap;
     public AudioClip creakScare;
     public AudioClip breathScare;
     public AudioClip whisperScare;
     public AudioClip classicScare;
+    public AudioClip ratScare;
+    public AudioClip crowScare;
 
     private void Start()
     {
