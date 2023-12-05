@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44892482985300169}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -96,7 +96,7 @@ Camera:
   m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BackGroundColor: {r: 1, g: 0.6241763, b: 0, a: 0.1764706}
   m_projectionMatrixMode: 0
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -421,9 +421,9 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 0.02745098}
-  m_Intensity: 2
-  m_Range: 8
+  m_Color: {r: 1, g: 0.76227623, b: 0.44025153, a: 0.19607843}
+  m_Intensity: 10
+  m_Range: 10
   m_SpotAngle: 60
   m_InnerSpotAngle: 6
   m_CookieSize: 10
@@ -455,7 +455,7 @@ Light:
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 0}
+  m_Flare: {fileID: 12100000, guid: abbc1e6231a944490a02e2ad613ec906, type: 2}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2

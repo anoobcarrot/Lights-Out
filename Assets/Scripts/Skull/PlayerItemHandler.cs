@@ -53,6 +53,9 @@ public class PlayerItemHandler : MonoBehaviour
         // Check if the player is in the trigger area before allowing skull sacrifice
         if (isInTriggerArea)
         {
+
+
+            UpdateSkullHand();
             CheckSacrificeInput(playerInput);
             UpdateSacrificeText();
         }
@@ -66,6 +69,7 @@ public class PlayerItemHandler : MonoBehaviour
 
             CheckBatteryInput(playerInput);
             CheckMedkitInput(playerInput);
+
 
             UpdateSkullHand();
             // Check for the "Drop" input action
