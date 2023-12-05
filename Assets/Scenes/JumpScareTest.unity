@@ -1021,6 +1021,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pumpkin
       objectReference: {fileID: 0}
+    - target: {fileID: 3719395497478071300, guid: 149914faacece2940a120e1783c4c6a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1034,6 +1038,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3719395497478071300, guid: 149914faacece2940a120e1783c4c6a9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1612405473}
+    - targetCorrespondingSourceObject: {fileID: 3719395497478071300, guid: 149914faacece2940a120e1783c4c6a9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1612405478}
   m_SourcePrefab: {fileID: 100100000, guid: 149914faacece2940a120e1783c4c6a9, type: 3}
 --- !u!1001 &397530506
 PrefabInstance:
@@ -2487,7 +2494,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 100
-  m_NavMeshData: {fileID: 23800000, guid: 5a25af0ab59a54f41988e35b3c0002e0, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 6b353d78f1327f8419df5b0c5f9606b3, type: 2}
   m_BuildHeightMesh: 0
 --- !u!65 &1041482893
 BoxCollider:
@@ -2866,11 +2873,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4867528393344068, guid: 1237551950c246d43ab02b1d69e6f317, type: 3}
   m_PrefabInstance: {fileID: 479208915}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1397434080 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6031636729940969616, guid: 92ab9afa98999404f903ed939986f303, type: 3}
-  m_PrefabInstance: {fileID: 27468845814210968}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1502255099
 GameObject:
   m_ObjectHideFlags: 0
@@ -3132,7 +3134,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 11.81, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &1600240464
 Transform:
@@ -3227,6 +3229,29 @@ MonoBehaviour:
   player2: {fileID: 4999191946060494888}
   shouldTeleport: 0
   teleportRadius: 2
+--- !u!136 &1612405478
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612405470}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1628766943 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4531015926296385475, guid: a313aa45be84148e38d8a7066366d6a6, type: 3}
@@ -4630,7 +4655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6031636729940969616, guid: 92ab9afa98999404f903ed939986f303, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7755044503562410378, guid: 92ab9afa98999404f903ed939986f303, type: 3}
       propertyPath: player1
@@ -5725,7 +5750,7 @@ PrefabInstance:
     - target: {fileID: 7180982764018689932, guid: caee1259d365e43d79830d3dc5468f56, type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 1397434080}
+      objectReference: {fileID: 1612405470}
     - target: {fileID: 7180982764018689932, guid: caee1259d365e43d79830d3dc5468f56, type: 3}
       propertyPath: torch1
       value: 
@@ -9307,7 +9332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  rotationSpeed: 200
+  rotationSpeed: 500
   sprintSpeedMultiplier: 2
   carryingSkullMoveSpeed: 2.5
   jumpForce: 5

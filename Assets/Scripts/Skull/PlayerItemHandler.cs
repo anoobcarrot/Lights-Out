@@ -63,7 +63,6 @@ public class PlayerItemHandler : MonoBehaviour
             // UpdateBatteryPickupText();
 
             UpdateTheItemPickupText();
-            UpdatePickupText();
 
             CheckBatteryInput(playerInput);
             CheckMedkitInput(playerInput);
@@ -72,6 +71,7 @@ public class PlayerItemHandler : MonoBehaviour
             // Check for the "Drop" input action
             if (playerInput.actions["Drop"].triggered)
             {
+                Debug.Log("Dropped Skull");
                 DropSkull();
             }
         }

@@ -2777,7 +2777,7 @@ PrefabInstance:
       objectReference: {fileID: 1177610457}
     - target: {fileID: 219582867801542909, guid: fd200bbedefb344868afff3ff05a5def, type: 3}
       propertyPath: m_SplitScreen
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1283543167805367512, guid: fd200bbedefb344868afff3ff05a5def, type: 3}
       propertyPath: healthBar

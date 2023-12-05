@@ -44,6 +44,8 @@ public class Player1Input : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         playerInput = GetComponent<PlayerInput>();
         currentActiveItem = torchPrefab; // Set the initial active item
         playerHealth = GetComponentInChildren<PlayerHealth>();

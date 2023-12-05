@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -545,19 +545,19 @@ MonoBehaviour:
 
     Jump: A
 
-    Sprint: Right Trigger
+    Sprint: Left Stick Press
 
     Camera
-    Rotation Left/Right: Right Joystick
+    Rotationt: Right Joystick
 
-    Sacrifice Skull To Well: Y
+    Drop Skull/Sacrificel: LT
 
-    Switch
-    Light Source: RB
+    Switch Light Source:
+    RB
 
-    Toggle Torch Light: X
+    Toggle Lights: X
 
-    Toggle Lighter Light: B
+    Interact: Y
 
 '
   m_isRightToLeft: 0
@@ -1546,7 +1546,7 @@ MonoBehaviour:
   additionalText: {fileID: 1022003071}
   zoomSpeed: 0.5
   fadeSpeed: 1
-  sceneToLoad: LeylaTest
+  sceneToLoad: PlayerAnimationsTest
 --- !u!1 &1808681727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,17 +1656,16 @@ MonoBehaviour:
     Sprint: Left Shift
 
     Camera
-    Rotation Left/Right: Mouse
+    Rotation: Mouse
 
-    Sacrifice Skull To Well: G
+    Drop Skull/Sacrifice: G
 
-    Switch Light
-    Source: Scroll Wheel Up/Down
+    Switch Light Source: Scroll
+    Wheel Up/Down
 
-    Toggle Torch Light: T
+    Toggle Lights: Right Click
 
-    Toggle Lighter Light:
-    L
+    Interact: E
 
 '
   m_isRightToLeft: 0
