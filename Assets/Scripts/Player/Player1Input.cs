@@ -110,7 +110,9 @@ public class Player1Input : MonoBehaviour
 
     private void HandleMovement()
     {
+        Debug.Log("Handling Movement");
         Vector2 moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
+        Debug.Log($"Move Input: {moveInput}");
         float horizontal = moveInput.x;
         float vertical = moveInput.y;
 
@@ -152,6 +154,7 @@ public class Player1Input : MonoBehaviour
         // Trigger Walk1 animation based on movement
         float movementMagnitude = new Vector2(horizontal, vertical).magnitude;
         playerAnimator.SetFloat("Speed", movementMagnitude);
+
     }
 
     private void HandleItemToggling()
