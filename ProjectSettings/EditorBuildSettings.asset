@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TitleScreen.unity
     guid: f370ec448b3c6774b935ec9350c0aabe
+  - enabled: 1
+    path: Assets/Scenes/MimicTest.unity
+    guid: 580162d9980f19942b8806d278c4730f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3766d59eb42080c4086d6a91a3ef88f9, type: 2}

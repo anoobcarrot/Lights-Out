@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip walkOutside;
     public AudioClip walkInside;
     public AudioClip bearTrap;
+    public AudioClip monsterBite;
     public AudioClip creakScare;
     public AudioClip breathScare;
     public AudioClip whisperScare;

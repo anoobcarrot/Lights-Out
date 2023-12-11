@@ -7,6 +7,6 @@ public class StartScreen : MonoBehaviour
 {
     public void LoadGame()
     {
-        SceneManager.LoadScene("JumpScareTest");
+        SceneManager.LoadScene("MimicTest");
     }
 }
