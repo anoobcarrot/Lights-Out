@@ -5600,7 +5600,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!135 &1129528971
+--- !u!135 &1129528975
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5617,10 +5617,10 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!1 &1156995089
 GameObject:
   m_ObjectHideFlags: 0
@@ -11001,7 +11001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675915457954794082, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.02406025
+      value: -25.06
       objectReference: {fileID: 0}
     - target: {fileID: 8675915457954794082, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11009,7 +11009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675915457954794082, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -60.19306
+      value: -12.6
       objectReference: {fileID: 0}
     - target: {fileID: 8675915457954794082, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11041,11 +11041,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675915457954794083, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: velocity.x
-      value: 0.09886219
+      value: 0.7996226
       objectReference: {fileID: 0}
     - target: {fileID: 8675915457954794083, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: velocity.z
-      value: 0.09759274
+      value: 0.15866698
       objectReference: {fileID: 0}
     - target: {fileID: 8675915458194695970, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11070,7 +11070,7 @@ PrefabInstance:
       addedObject: {fileID: 1129528970}
     - targetCorrespondingSourceObject: {fileID: 8675915457954794080, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1129528971}
+      addedObject: {fileID: 1129528975}
   m_SourcePrefab: {fileID: 100100000, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
 --- !u!1 &1743582434
 GameObject:
