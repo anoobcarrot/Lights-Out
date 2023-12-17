@@ -3,7 +3,7 @@ using TMPro;
 
 public class WallTextAppear : MonoBehaviour
 {
-    public TextMeshProUGUI targetText;
+    public TextMeshPro targetText;
     public float typeSpeed = 0.05f;
 
     private string originalText;

@@ -306,7 +306,7 @@ private Battery FindNearestBattery()
         UpdateSkullUI();
         UpdateSacrificedSkullsUI();
 
-        if (sacrificedSkulls == 20)
+        if (sacrificedSkulls == 10)
         {
             // Implement logic for winning the game
             if (CompareTag("Player1"))
